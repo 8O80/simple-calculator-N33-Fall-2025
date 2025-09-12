@@ -3,35 +3,40 @@
 
 namespace SimpleCalculator
 {
-    class Program
+    
+   public class Program
     {
         static void Main(string[] args)
         {
             try
             {
-                // Class to convert user input
-                InputConverter inputConverter = new InputConverter();
-
-                // Class to perform actual calculations
-                CalculatorEngine calculatorEngine = new CalculatorEngine();
+              
                 Console.WriteLine("Welcome to Simple Calculator\nEnter  your first number then press Enter:");
-                double firstNumber = inputConverter.ConvertInputToNumeric(Console.ReadLine());
+                double firstNumber = InputConverter.ConvertInputToNumeric(Console.ReadLine());
                 Console.WriteLine("Enter  your Second number then press Enter:");
-                double secondNumber = inputConverter.ConvertInputToNumeric(Console.ReadLine());
+                double secondNumber = InputConverter.ConvertInputToNumeric(Console.ReadLine());
                 Console.WriteLine("Enter operation like + or add number then press Enter:");
                 string operation = Console.ReadLine();
-
-                string result = calculatorEngine.Calculate(operation, firstNumber, secondNumber);
+                
+                double result = CalculatorEngine.Calculate(operation, firstNumber, secondNumber);
 
                 Console.WriteLine(result);
 
             }
-            catch (Exception ex)
-
-            {
-                // Normally, we'd log this error to a file.
-                Console.WriteLine(ex.Message);
-            }
+          catch (InvalidOperationException)
+{
+    Console.WriteLine("Invalid operation entered.");
+    Console.WriteLine(" Valid operations are:");
+    Console.WriteLine("   + or add        Addition");
+    Console.WriteLine("   - or subtract   Subtraction");
+    Console.WriteLine("   * or multiply   Multiplication");
+    Console.WriteLine("   / or divide     Division");
+}
+catch (Exception ex)
+{
+    
+    Console.WriteLine("An unexpected error occurred: " + ex.Message);
+}
 
         }
     }
