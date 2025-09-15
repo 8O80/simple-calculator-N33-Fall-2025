@@ -1,5 +1,6 @@
 ﻿using System;
 
+using System.Text;
 
 namespace SimpleCalculator
 {
@@ -20,8 +21,11 @@ namespace SimpleCalculator
                 
                 double result = CalculatorEngine.Calculate(operation, firstNumber, secondNumber);
 
-                Console.WriteLine(result);
+                var results = new StringBuilder();
 
+                results.AppendFormat("The value {0} {1} value {2} is equal to {3} ,", firstNumber, operation, secondNumber, result);
+
+                Console.WriteLine(results.ToString());
             }
           catch (InvalidOperationException)
 {
@@ -33,6 +37,7 @@ namespace SimpleCalculator
     Console.WriteLine("   / or divide     Division");
 }
 catch (Exception ex)
+
 {
     
     Console.WriteLine("An unexpected error occurred: " + ex.Message);
